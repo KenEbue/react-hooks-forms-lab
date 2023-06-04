@@ -1,32 +1,17 @@
-import React, { useState } from 'react';
-import Filter from './Filter';
+import React from "react";
 
-function ParentComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-
-  const handleSearchChange = (value) => {
-    setSearchTerm(value);
-  };
-
-  const handleCategoryChange = (event) => {
-    const { value } = event.target;
-    setSelectedCategory(value);
-  };
-
-  // Other code and components
-
+function Filter({ onCategoryChange }) {
   return (
-    <div>
-      {/* Other components */}
-      <Filter
-        search={searchTerm}
-        onSearchChange={handleSearchChange}
-        onCategoryChange={handleCategoryChange}
-      />
-      {/* Other components */}
+    <div className="Filter">
+      <input type="text" name="search" placeholder="Search..." />
+      <select name="filter" onChange={onCategoryChange}>
+        <option value="All">Filter by category</option>
+        <option value="Produce">Produce</option>
+        <option value="Dairy">Dairy</option>
+        <option value="Dessert">Dessert</option>
+      </select>
     </div>
   );
 }
 
-export default ParentComponent;
+export default Filter;
