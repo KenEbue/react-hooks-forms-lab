@@ -5,47 +5,41 @@ function ItemForm({ onItemFormSubmit }) {
   const [itemName, setItemName] = useState("");
   const [itemCategory, setItemCategory] = useState("Produce");
 
-  const handleNameChange = (e) => {
-    setItemName(e.target.value);
-  };
+  function handleNameChange(event) {
+    setItemName(event.target.value);
+  }
 
-  const handleCategoryChange = (e) => {
-    setItemCategory(e.target.value);
-  };
+  function handleCategoryChange(event) {
+    setItemCategory(event.target.value);
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
+    
     const newItem = {
       id: uuid(),
       name: itemName,
       category: itemCategory,
     };
+
+    // Pass the new item to the onItemFormSubmit callback
     onItemFormSubmit(newItem);
+
+    // Reset the form fields
     setItemName("");
     setItemCategory("Produce");
-  };
+  }
 
   return (
     <form className="NewItem" onSubmit={handleSubmit}>
-      <label htmlFor="name">
+      <label>
         Name:
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={itemName}
-          onChange={handleNameChange}
-        />
+        <input type="text" name="name" value={itemName} onChange={handleNameChange} />
       </label>
 
-      <label htmlFor="category">
+      <label>
         Category:
-        <select
-          id="category"
-          name="category"
-          value={itemCategory}
-          onChange={handleCategoryChange}
-        >
+        <select name="category" value={itemCategory} onChange={handleCategoryChange}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>
